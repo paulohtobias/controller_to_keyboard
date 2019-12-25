@@ -18,7 +18,7 @@ typedef enum{
     POV_RIGHT = 2,
     POV_DOWN = 4,
     POV_LEFT = 8,
-    POV_CENTER = 120
+    POV_CENTER = 128
 }POV_CODE;
 
 typedef enum{

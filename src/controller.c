@@ -44,7 +44,26 @@ void controller_get_input(Controller *controller){
         controller->RY = joy.dwRpos;
         controller->TL = joy.dwUpos;
         controller->TR = joy.dwVpos;
+        
+        int i;
+        for(i=0; i<4; i++){
+            if(controller->POV != POV_CENTER){
+                if(joy.dwPOV == 65500){
+                    //direcional i foi levantado
+                    release_key(controller->mapping[i]);
+                }
+            }
+        }
         controller->POV = 1 << (joy.dwPOV/9000);
+        
+        for(i=0; i<controller->total_buttons; i++){
+            if(controller->buttons_pressed & (1 << 1)){
+                if((joy.dwButtons & (1 << 1) == 0)){
+                    //botão i foi levantado
+                    release_key(controller->mapping[12 + i]);
+                }
+            }
+        }
         controller->buttons_pressed = joy.dwButtons;
     }else{
         printf("ERROR: controller_get_input\n");
