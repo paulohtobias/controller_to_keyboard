@@ -3,7 +3,10 @@
 *.ko
 *.obj
 *.elf
-./obj/
+obj/
+
+#Dependency files
+*.d
 
 # Precompiled Headers
 *.gch
@@ -28,14 +31,12 @@
 *.i*86
 *.x86_64
 *.hex
+*.lnk
 
 # Debug files
 *.dSYM/
 
-*.d
-
+#Project folders and files
 nbproject/
-
-*.txt
-
-teste/
+.vscode/
+tests/

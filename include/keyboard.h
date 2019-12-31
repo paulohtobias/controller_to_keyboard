@@ -1,8 +1,10 @@
-/* 
- * File:   keyboard.h
- * Author: paulo
+/**
+ * Controller to Keyboard
  *
- * Created on 24 de Julho de 2017, 11:04
+ * keyboard.h
+ *
+ * Paulo Tobias
+ * paulohtobias@outlook.com
  */
 
 #ifndef KEYBOARD_H
@@ -10,11 +12,29 @@
 
 #define WINVER 0x0500
 #include <windows.h>
-#include <stdio.h>
 
-void press_key(WORD key);
+/**
+ * Presses `key`.
+ *
+ * NOTE: key stays pressed unitl `ctk_keyboard_release_key(key)` is called.
+ *
+ * Params:
+ *     @key: virtual-key code as seen on https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+ *
+ * Return:
+ *
+ */
+UINT ctk_keyboard_press_keys(const WORD *keys, int keys_len);
 
-void release_key(WORD key);
+/**
+ * Releases `key`.
+ *
+ * Params:
+ *     @key: virtual-key code as seen on https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+ *
+ * Return:
+ *
+ */
+UINT ctk_keyboard_release_keys(const WORD *keys, int keys_len);
 
-#endif //KEYBOARD_H
-
+#endif /* KEYBOARD_H */

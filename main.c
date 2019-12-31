@@ -1,36 +1,42 @@
-/* 
- * File:   main.exe.c
- * Author: paulo
+/**
+ * Controller to Keyboard
  *
- * Created on 24 de Julho de 2017, 08:14
+ * main.c
+ *
+ * Paulo Tobias
+ * paulohtobias@outlook.com
  */
 
-#include "controller.h"
-
+#include <stdio.h>
+#include <string.h>
+#include "keyboard.h"
+#include <strsafe.h>
 
 int main(int argc, char *argv[]){
-    /*
-     * identifica controle 1
-     * 
-     * procura no arquivo (error checking...)
-     * 
-     * mapeia
-     */
-    
-    Controller c1 = new_Controller();
-    
-    //mapeando algumas teclas
-    c1.mapping[MAP_BUTTON_5] = 'W';
-    c1.mapping[MAP_BUTTON_6] = 'D';
-    c1.mapping[MAP_BUTTON_7] = 'S';
-    c1.mapping[MAP_BUTTON_8] = 'A';
-    c1.mapping[MAP_BUTTON_2] = 'O';
-    
-    while(1){
-        controller_get_input(&c1);
-        controller_to_keyboard(c1);
-    }
-    
+    WORD key;
+	UINT retval;
+
+	while (1) {
+		printf("Key: ");
+		scanf("%hx", &key);
+
+		if (key == 0) {
+			break;
+		}
+
+		retval = ctk_keyboard_press_keys(&key, 1);
+		printf("retval: %d\n", retval);
+		if (retval != 1) {
+			return 1;
+		}
+
+		retval = ctk_keyboard_release_keys(&key, 1);
+		printf("retval: %d\n", retval);
+		if (retval != 1) {
+			return 1;
+		}
+
+	}
+
     return 0;
 }
-
